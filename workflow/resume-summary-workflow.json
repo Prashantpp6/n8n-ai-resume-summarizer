@@ -1,1 +1,196 @@
-
+{
+  "name": "claude",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        832,
+        -400
+      ],
+      "id": "3d11b41c-c7b4-4223-9172-119de78bc1fd",
+      "name": "When clicking 'Execute workflow'"
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "1-dLthF3isywLm24XAoXnD3qu7FeYv7B8",
+          "mode": "list",
+          "cachedResultName": "prashant-resume.txt",
+          "cachedResultUrl": "https://drive.google.com/file/d/1-dLthF3isywLm24XAoXnD3qu7FeYv7B8/view?usp=drivesdk"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1056,
+        -400
+      ],
+      "id": "1b39be93-164c-4d88-861d-715cddcace73",
+      "name": "Download file",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "BKSAOtBprefL5uGd",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "text",
+        "destinationKey": "text",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1.1,
+      "position": [
+        1280,
+        -400
+      ],
+      "id": "da6f678b-f8e3-42cf-8e31-fa09f3d5adc0",
+      "name": "Extract from File"
+    },
+    {
+      "parameters": {
+        "language": "pythonNative",
+        "pythonCode": "text = _items[0][\"json\"][\"text\"]\n\nsentences = text.split(\".\")\nsummary = sentences[:5]   # take first 5 points\n\nreturn [\n    {\n        \"json\": {\n            \"summary_points\": summary,\n            \"source\": \"prashant-resume\"\n        }\n    }\n]"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1504,
+        -400
+      ],
+      "id": "8f652416-bf79-487a-924e-f19b07ccbe43",
+      "name": "Chunk Text"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.groq.com/openai/v1/chat/completions",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "\"Authorization\": \"Bearer YOUR_GROQ_API_KEY\""
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"llama-3.1-8b-instant\",\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\":{{ JSON.stringify(\"Summarize this resume in 5 bullet points:\\n\\n\" + $json.summary_points.join(\"\\n\")) }}\n    }\n  ]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        1728,
+        -400
+      ],
+      "id": "c6d2c6a2-b4ed-4474-a0a9-5c7c6c03d850",
+      "name": "Summarize with Groq AI"
+    },
+    {
+      "parameters": {
+        "chatId": "993416061",
+        "text": "=✅ Resume Chunk #{{ $node[\"Chunk Text\"].json[\"index\"] + 1 }} Summary:\n\n{{ $json[\"choices\"][0][\"message\"][\"content\"] }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1968,
+        -400
+      ],
+      "id": "eb5b3501-fa99-49e0-855f-fa98d44eb945",
+      "name": "Send Summary to Telegram",
+      "webhookId": "09018b3a-d517-4412-b0b9-bb20bafbee45",
+      "credentials": {
+        "telegramApi": {
+          "id": "GbyjIhIogQyxDnBf",
+          "name": "Telegram account 2"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking 'Execute workflow'": {
+      "main": [
+        [
+          {
+            "node": "Download file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download file": {
+      "main": [
+        [
+          {
+            "node": "Extract from File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from File": {
+      "main": [
+        [
+          {
+            "node": "Chunk Text",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Chunk Text": {
+      "main": [
+        [
+          {
+            "node": "Summarize with Groq AI",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Summarize with Groq AI": {
+      "main": [
+        [
+          {
+            "node": "Send Summary to Telegram",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "73fcc6c4-c9ab-4319-99c9-a6d68ab72d7b",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "3700c3eef36372ac9153864623c0cad4d755a5e150452770194ad83b4dc7a2f1"
+  },
+  "id": "OY757ydoTS9R5qUg",
+  "tags": []
+}
