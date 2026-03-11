@@ -1,49 +1,93 @@
+![GitHub Repo stars](https://img.shields.io/github/stars/Prashantpp6/n8n-ai-resume-summarizer?style=social)
+
 # AI Resume Summarizer (n8n + Groq LLM)
 
-An AI-powered workflow built using **n8n** and **Groq LLM** that automatically extracts resume text from Google Drive, summarizes it into concise bullet points, and sends the summary to Telegram.
+An AI-powered workflow built using **n8n** and **Groq LLM** that automatically extracts resume text from **Google Drive**, summarizes it into concise bullet points using **Llama 3.1**, and sends the results to **Telegram**.
+
+This project demonstrates how **Large Language Models (LLMs)** can be integrated with workflow automation platforms to build intelligent document-processing pipelines.
 
 ---
 
-## 🚀 Project Overview
+# 🚀 Project Overview
 
-This project demonstrates how AI and workflow automation can be combined to process resumes automatically.
+Recruiters and HR teams often spend significant time manually reviewing resumes.
 
-The workflow:
+This project demonstrates how **AI + workflow automation** can reduce that effort by automatically extracting insights from resumes and delivering summarized profiles instantly.
+
+The system:
 
 1. Downloads a resume from Google Drive
-2. Extracts text from the file
-3. Sends the text to Groq LLM for summarization
-4. Generates concise bullet-point insights
-5. Sends the summary to a Telegram bot
+2. Extracts text from the document
+3. Sends the text to the Groq LLM API
+4. Generates structured bullet-point summaries
+5. Sends the results directly to a Telegram bot
 
-This automation reduces manual resume analysis and shows how AI agents can be integrated into workflow tools.
+This automation shows how **AI agents can be integrated into workflow tools** to automate document analysis.
 
 ---
 
-## ⚙️ Workflow Architecture
+# ⚙️ Workflow Architecture
 
+```
 Manual Trigger
-↓
+      ↓
 Google Drive – Download Resume
-↓
+      ↓
 Extract Text from File
-↓
-Groq LLM – AI Resume Summary
-↓
-Telegram – Send Summary
+      ↓
+Groq LLM (Llama 3.1) – AI Resume Summary
+      ↓
+Telegram Bot – Send Summary
+```
 
 ---
 
-## 🧠 Technologies Used
+# 📸 Workflow Preview
+
+### n8n Workflow
+
+![Workflow](screenshots/workflow.png)
+
+### Telegram Output
+
+![Telegram Output](screenshots/telegram-output.png)
+
+---
+
+# 🧠 Technologies Used
 
 * **n8n** – Workflow automation platform
-* **Groq API** – Llama 3.1 model for AI summarization
+* **Groq API (Llama 3.1)** – Large Language Model for summarization
 * **Google Drive API** – Resume storage and retrieval
-* **Telegram Bot API** – Notification delivery
+* **Telegram Bot API** – Automated notification delivery
+* **Node-based AI pipelines** – Workflow orchestration
 
 ---
 
-## 📂 Project Structure
+# 🧩 AI Workflow Logic
+
+1. Resume file is stored in **Google Drive**
+2. **n8n workflow** downloads the document
+3. Text extraction converts the document into raw text
+4. **Groq Llama 3.1 LLM** analyzes the content
+5. AI generates structured bullet-point insights
+6. **Telegram bot** sends the summary to the user
+
+---
+
+# 🎥 Demo
+
+This workflow automatically processes resumes and sends summarized insights to Telegram.
+
+Automation pipeline:
+
+```
+Resume → AI Processing → Smart Summary → Telegram Notification
+```
+
+---
+
+# 📂 Project Structure
 
 ```
 n8n-ai-resume-summarizer
@@ -51,33 +95,58 @@ n8n-ai-resume-summarizer
 ├── workflow
 │   └── resume-summary-workflow.json
 │
+├── screenshots
+│   ├── workflow.png
+│   └── telegram-output.png
+│
 ├── README.md
 │
-└── screenshots
+└── prashant-resume.txt
 ```
 
 ---
 
-## 🔑 Setup Instructions
+# 🔑 Setup Instructions
 
-1. Install or open **n8n**
-2. Import the workflow JSON file
-3. Configure the following credentials:
+### 1️⃣ Install n8n
 
-   * Google Drive
-   * Groq API Key
-   * Telegram Bot
-4. Replace the placeholder:
+Install locally or use n8n cloud.
+
+https://n8n.io/
+
+### 2️⃣ Import Workflow
+
+Import the file:
+
+```
+workflow/resume-summary-workflow.json
+```
+
+### 3️⃣ Configure Credentials
+
+You need to configure:
+
+* Google Drive API
+* Groq API Key
+* Telegram Bot Token
+
+### 4️⃣ Replace API Key
+
+Replace:
 
 ```
 YOUR_GROQ_API_KEY
 ```
 
-5. Execute the workflow
+with your actual **Groq API key**.
+
+### 5️⃣ Execute the Workflow
+
+Trigger the workflow manually to process the resume and send the summary to Telegram.
 
 ---
 
-## 📌 Example Output
+# 📌 Example Output
 
 The Telegram bot returns a summary like:
 
@@ -89,37 +158,61 @@ The Telegram bot returns a summary like:
 
 ---
 
-## 🎯 Use Case
+# 🎯 Use Cases
 
 This project demonstrates practical applications of:
 
-* AI workflow automation
-* LLM integration into business pipelines
-* Automated document processing
+* AI-powered document processing
+* Resume intelligence systems
+* LLM integration into automation pipelines
+* HR technology automation
 
 It can be extended into more advanced systems such as:
 
 * AI Resume Parser
 * Job Matching Systems
 * Automated Job Application Agents
+* Resume Skill Extraction Systems
 
 ---
 
-## 👨‍💻 Author
+# 💡 Why This Project Matters
 
-**Prashant Singh Parmar**
+Organizations process thousands of resumes during recruitment.
 
-LinkedIn
-https://www.linkedin.com/in/prashant-singh-parmar/
+This project shows how **AI and automation can reduce manual resume screening** by generating quick insights from candidate profiles.
 
-GitHub
-https://github.com/Prashantpp6
+It highlights skills in:
+
+* AI workflow engineering
+* LLM integration
+* automation pipelines
+* real-world business process automation
 
 ---
 
-## ⭐ Future Improvements
+# ⭐ Future Improvements
+
+Planned improvements for this project:
 
 * AI skill extraction from resumes
 * Resume-job matching system
 * Automatic job application automation
 * Vector database integration for resume search
+* Resume ranking system using embeddings
+
+---
+
+# 👨‍💻 Author
+
+**Prashant Singh Parmar**
+
+🔗 LinkedIn
+https://www.linkedin.com/in/prashant-singh-parmar/
+
+💻 GitHub
+https://github.com/Prashantpp6
+
+---
+
+This project is part of my portfolio demonstrating **AI automation, LLM integration, and workflow engineering**.
