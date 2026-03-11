@@ -1,0 +1,58 @@
+ABOUT PRASHANT SINGH PARMAR
+
+Name: Prashant Singh Parmar
+Location: Indore, Madhya Pradesh, India
+Email: prashantsinghparmar06@gmail.com
+LinkedIn: linkedin.com/in/prashant-singh-parmar
+
+EDUCATION
+Master of Computer Application (MCA)
+IPS Academy, Indore | 2022-2024 | CGPA: 7.8
+
+EXPERIENCE
+
+Softnoid IT Solutions - AI Workflow Automation Intern
+January 2026 - Present
+- Built AI-driven workflows to automate reporting processes
+- Developed data pipelines transforming raw data into insights
+- Reduced manual reporting effort by 25% through automation
+
+Forest Makers - Reporting Analyst Intern
+May 2025 - July 2025
+- Automated recurring business reports using SQL and Power BI
+- Improved reporting efficiency by 30% via workflow optimization
+- Delivered KPI-based insights for strategic decision-making
+
+PROJECTS
+
+AI Job Tracker
+- Automated job tracking system using n8n
+- Fetches AI jobs hourly from RSS feeds
+- Logs to Google Sheets and sends Telegram alerts
+- Reduces manual job searching by 2+ hours daily
+- GitHub: github.com/Prashantpp6/ai-job-tracker-n8n
+
+Customer Churn Analysis
+- Power BI dashboard for customer churn patterns
+- Analyzed churn by contract type, tenure, demographics
+- Proposed data-driven strategies to reduce churn
+
+Pharmaceutical Sales Analysis
+- Power BI dashboard for regional sales analysis
+- Used DAX and Power Query for data modeling
+- Identified top-performing products and sales trends
+
+SKILLS
+- AI & Automation: n8n, LLM Integration, Prompt Engineering
+- Programming: Python, JavaScript, SQL
+- Visualization: Power BI, Seaborn
+- Cloud: AWS, Git, GitHub
+- Database: MySQL
+
+ACHIEVEMENTS
+- Basketball Captain, RGPV University - 5+ regional and national wins
+- NCC Representative - TSC and RDC national camps
+
+CAREER GOAL
+Looking for AI Automation, Workflow Engineer, or Data Analyst roles.
+Open to internships and full-time positions in Indore or remote.
